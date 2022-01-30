@@ -4,23 +4,34 @@
       <div class="form-group">
         <label for="">Name</label>
         <input name="name" [(ngModel)]="event.name" type="text"
-          class="form-control" pattern=".{8,}" required>
+          class="form-control" pattern=".{8,25}" required>
         <div [hidden]="eventForm.controls.name?.valid" class="error-message">
-          The name of the event must be...
+          The name of the event must be min. 8 max. 25 characters long.
         </div>
       </div>
       <div class="form-group">
         <label for="">Date</label>
         <input name="date" [(ngModel)]="event.date" type="text"
-          class="form-control">
+          class="form-control" pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" required>
+          <div [hidden]="eventForm.controls.date?.valid" class="error-message">
+            The date of the event must follow format day/month/year (00/00/0000).
+          </div>
       </div>
       <div class="form-group">
         <label for="">Time</label>
-        <input name="time" [(ngModel)]="event.time" type="text" class="form-control">
+        <input name="time" [(ngModel)]="event.time" type="text"
+        class="form-control" pattern="^(0[1-9]|1[0-2])(am|pm)$" required>
+        <div [hidden]="eventForm.controls.time?.valid" class="error-message">
+          The time of the event must follow format 00am or 00pm.
+        </div>
       </div>
       <div class="form-group">
         <label for="">Location</label>
-        <input name="location" [(ngModel)]="event.location" type="text" class="form-control">
+        <input name="location" [(ngModel)]="event.location" type="text"
+        class="form-control" pattern="[A-Z]([a-z]{4,24})" required>
+        <div [hidden]="eventForm.controls.location?.valid" class="error-message">
+          The location of the event must be min. 5 max. 25 characters long and start with uppercase.
+        </div>
       </div>
 
       <button type="submit" class="btn btn-primary btn-block btn-lg">
